@@ -17,6 +17,7 @@ export default class Login extends Component {
         <input id = "username-email-box" />
         <input type = "password" id = "password-box"/>
         <button onClick = {this.handleLogin}>Login</button>
+        <a href = "/signup">Don't have an account? Sign up here.</a>
       </div>
 
       );
