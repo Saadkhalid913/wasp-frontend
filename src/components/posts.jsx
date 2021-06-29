@@ -15,17 +15,19 @@ export default class Posts extends Component {
   render() {
     console.log(this.state)
     return (
-      this.state.posts.map(post => (
+      <div className = "tasks">
+        { this.state.posts.map(post => (
         <Task
           key={post._id}
           task={post}
           toggleComplete={this.toggleComplete}/>
-      ))
+      ))}
+      </div>
     );
   }
 
   GetUserPosts = async () => {
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MGRhNDY5YjU2YTRjMjFkMDA2ZWIzZjUiLCJpYXQiOjE2MjQ5MTc2NTl9.LI0NB48EOdGIRmfTRlHBqkS4BL4OSoctcqGbAFh3-nY"
+    const token = this.props.token
     const posts = await axios.get("http://localhost:3000/api/posts/populate", {
       headers: {
         user_auth_token: token
