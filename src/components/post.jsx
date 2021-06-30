@@ -17,7 +17,7 @@ export default class Task extends Component {
   }
 
   getStyles = function() {
-    const backgroundColor = (this.props.task.completed) ? "green" : "white";
+    const backgroundColor = (this.props.task.completed) ? "#00A878" : "white";
     return { backgroundColor } 
   }
 }

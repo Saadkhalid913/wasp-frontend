@@ -37,4 +37,10 @@ submitToken = (token) => {
   this.setState({ token })
 }
 
+logOut = () => {
+  localStorage.clear();
+  window.location.reload()
+  return
+}
+
 }

@@ -4,7 +4,8 @@ import Task from "./post"
 
 export default class Posts extends Component {
   state = {
-    posts: []
+    posts: [],
+    token: false 
   }
 
   componentDidMount = async () => {
@@ -20,9 +21,8 @@ export default class Posts extends Component {
   }
   
   render() {
-
     if (this.state.posts.length === 0) {
-      return (
+    return (
         <React.Fragment>
           <div className="add-task-wrapper">
               <input placeholder ="Add item" id = "add-task-input"/>
@@ -63,7 +63,19 @@ export default class Posts extends Component {
         user_auth_token: token
       }
     })
+
+    if (posts.data.error) {
+      this.logOut()
+      return
+    }
+    this.setState({token: true})
     return posts.data
+  }
+
+  logOut = () => {
+      this.setState({token: false})
+      localStorage.clear();
+      return
   }
 
   toggleComplete = async (task) => {

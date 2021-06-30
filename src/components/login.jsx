@@ -4,16 +4,20 @@ export default class Login extends Component {
   
   state = {error: null, message: null}
 
-  componentDidMount() {
+  addListeners = function() {
     window.addEventListener("keyup", (e) => {
       if (e.keyCode === 13) {
         e.preventDefault();
         document.getElementById("login-submit").click()
         document.getElementById("username-email-box").value = ""
         document.getElementById("password-box").value = ""
-    
       }
     })
+  }
+
+  componentDidMount() {
+    this.addListeners();
+    if (localStorage.getItem("user_auth_token")) return this.props.submitToken(localStorage.getItem("user_auth_token"))
   }
   render() {
     return (
@@ -53,6 +57,7 @@ export default class Login extends Component {
     if (response.data.error)
       this.setState({error: response.data.error})
 
+    localStorage.setItem("user_auth_token", response.data.user_auth_token)
     this.props.submitToken(response.data.user_auth_token)
   }
 }

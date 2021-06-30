@@ -183,10 +183,14 @@ body {
 
 #add-task-input {
   height: 5vh;
+  font-size: 1.25rem;
   width: min(24rem, 85%);
   font-weight: 500;
+  outline: none;
   border: 3px solid var(--main-contrast);
   padding-left: 0.25rem;
+  background-color: transparent;
+  color: var(--main-contrast);
 }
 
 #add-task-button {
@@ -202,6 +206,19 @@ body {
   border: 3px solid var(--main-contrast);
 }
 
+@media only screen and (max-width: 768px) {
+  .add-task-wrapper {
+    height: 20vh;
+    flex-direction: column;
+    justify-content: space-evenly;
+  }
+
+  #add-task-input {
+    height: 7.5vh;
+    font-size: 1.25rem;
+  }
+}
+
 .task {
   margin: 1rem;
   display: flex;
@@ -209,12 +226,14 @@ body {
   justify-content: space-between;
   z-index: 1;
   box-shadow: 0 0 8px 1px rgb(128, 128, 128);
+  height: 100%;
 }
 
 .task > p {
-  width: 90%;
+  overflow-wrap: break-word;
+  width: 80%;
   padding-left: 30%;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .task > button {
@@ -251,4 +270,7 @@ body {
   margin: 0 auto;
   text-align: center;
   font-size: 2rem;
+  background-color: white;
+  height: 100vh;
+  padding: 5vh;
 }
