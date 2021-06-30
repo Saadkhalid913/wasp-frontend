@@ -8,7 +8,7 @@ export default class Signup extends Component {
 
   render() {
     return (
-      <div>
+      <div className = "signup-box">
         <p >{this.state.error}</p>
         <div>
           <label htmlFor = "username">Username</label>
@@ -49,9 +49,7 @@ export default class Signup extends Component {
     console.log(response)
 
     if (response.data.error) return this.setState({error: response.data.error});
-    this.props.submitToken(response.data.user_auth_token)
-    
-
+    console.log(response)
   }
 
 }
