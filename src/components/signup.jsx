@@ -11,7 +11,7 @@ export default class Signup extends Component {
     return (
       <div className = "signup-box">
         <p >{this.state.error}</p>
-        <p style={{color: "green"}}>{this.state.message}</p>
+        <a href = "/" style={{color: "green"}}>{this.state.message}</a>
         <div>
           <label htmlFor = "username">Username</label>
           <input type="text" name = "username" id = "username-box" />
@@ -48,7 +48,7 @@ export default class Signup extends Component {
 
     if (!(pass1===pass2)) return this.setState({error: "The two passwords do not match"})
     
-    const response = await axios.post("http://localhost:3000/api/users/signup", { email, username, password: pass1 })
+    const response = await axios.post("https://wasp-api.herokuapp.com/api/users/signup", { email, username, password: pass1 })
 
     if (response.data.error) return this.setState({error: response.data.error});
 
@@ -58,7 +58,7 @@ export default class Signup extends Component {
       document.getElementById("password-box1").value = ""
       document.getElementById("password-box2").value = ""
         
-      return this.setState({message: "Account created successfully!"})
+      return this.setState({message: "Account created successfully! Click here to log in"})
 
     }
     

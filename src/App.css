@@ -12,6 +12,7 @@
 :root {
   --main-contrast: black;
   --main-background: #f2ef1b;
+  --main-active-constrast: rgba(0, 0, 0, 0.685);
 }
 
 body {
@@ -65,7 +66,7 @@ body {
   outline: none;
   border: 3px solid var(--main-contrast);
   background-color: transparent;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: 400;
 }
 
@@ -89,6 +90,12 @@ body {
   margin-top: 1vh;
 }
 
+#login-submit:hover {
+  transform: scale(1.02, 1.02);
+}
+#login-submit:active {
+  background-color: var(--main-active-constrast);
+}
 .signup-box {
   padding: 1rem;
   width: min(90%, 25rem);
@@ -109,6 +116,12 @@ body {
   margin-bottom: 1vh;
 }
 
+.signup-box > a {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1vh;
+}
+
 .signup-box > div {
   width: 80%;
   display: flex;
@@ -125,6 +138,13 @@ body {
   border: none;
   outline: none;
   margin-top: 1vh;
+}
+
+.signup-box > button:hover {
+  transform: scale(1.02, 1.02);
+}
+.signup-box > button:active {
+  background-color: var(--main-active-constrast);
 }
 
 .signup-box > div > input {

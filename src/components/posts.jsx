@@ -10,6 +10,13 @@ export default class Posts extends Component {
   componentDidMount = async () => {
     const posts = await this.GetUserPosts()
     this.setState({ posts })
+
+    window.addEventListener("keyup", (e) => {
+      if (e.keyCode === 13) {
+        e.preventDefault();
+        document.getElementById("add-task-button").click()
+      }
+    })
   }
   
   render() {
@@ -29,7 +36,7 @@ export default class Posts extends Component {
     }
     return (
       <React.Fragment>
-       <div class = "tasks-wrapper">
+       <div className = "tasks-wrapper">
        <div className="add-task-wrapper">
               <input placeholder ="Add item" id = "add-task-input"/>
               <button onClick={() => this.handleAdd()} id = "add-task-button">Add post</button>
@@ -51,7 +58,7 @@ export default class Posts extends Component {
 
   GetUserPosts = async () => {
     const token = this.props.token
-    const posts = await axios.get("http://localhost:3000/api/posts/populate", {
+    const posts = await axios.get("https://wasp-api.herokuapp.com/api/posts/populate", {
       headers: {
         user_auth_token: token
       }
@@ -61,15 +68,24 @@ export default class Posts extends Component {
 
   toggleComplete = async (task) => {
     const id = task._id;
-    const response = await axios.put("http://localhost:3000/api/posts/toggle/" + id, {}, {headers:{ user_auth_token:this.props.token}})
+    const response = await axios.put("https://wasp-api.herokuapp.com/api/posts/toggle/" + id, {}, {headers:{ user_auth_token:this.props.token}})
+    if (response.data.error || response.status !== 200) return alert("There was an error")
+    const post = response.data;
+    const posts = [...this.state.posts];
+    const index = posts.findIndex(p => {
+      return p._id === post._id
+    })
+    posts[index].completed = post.completed
+    this.setState({ posts })
   }
 
   handleAdd = async () => {
     const text = document.getElementById("add-task-input").value;
     if (text.length < 8) return 
-    const response = await axios.post("http://localhost:3000/api/posts/", {user_auth_token:this.props.token, text})
-    if (response.error) return alert(response.error)
+    const response = await axios.post("https://wasp-api.herokuapp.com/api/posts/", {user_auth_token:this.props.token, text})
+    if (response.data.error) return alert(response.data.error)
     this.addPostToState(response.data)
+    document.getElementById("add-task-input").value = ""
   }
 
   addPostToState = (post) => {
@@ -80,7 +96,7 @@ export default class Posts extends Component {
   handleDelete = async (post) => {
   
     let id = post._id;
-    const response = await axios.delete("http://localhost:3000/api/posts/" + id, {headers : { user_auth_token: this.props.token } })
+    const response = await axios.delete("https://wasp-api.herokuapp.com/api/posts/" + id, {headers : { user_auth_token: this.props.token } })
     id = response.data._id;
 
     const posts = [...this.state.posts]
