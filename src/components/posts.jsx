@@ -13,7 +13,6 @@ export default class Posts extends Component {
   }
   
   render() {
-    console.log(this.state)
 
     if (this.state.posts.length === 0) {
       return (
@@ -23,16 +22,15 @@ export default class Posts extends Component {
               <button onClick={() => this.handleAdd()} id = "add-task-button">Add post</button>
           </div>
           <div className = "no-posts-wrapper">
-              <h2>There are no posts!</h2>
+              <h2>No items to display!</h2>
           </div>
         </React.Fragment>
-
-
       )
     }
     return (
       <React.Fragment>
-        <div className="add-task-wrapper">
+       <div class = "tasks-wrapper">
+       <div className="add-task-wrapper">
               <input placeholder ="Add item" id = "add-task-input"/>
               <button onClick={() => this.handleAdd()} id = "add-task-button">Add post</button>
         </div>
@@ -46,6 +44,7 @@ export default class Posts extends Component {
           handleDelete={this.handleDelete}/>
       ))}
       </div>
+       </div>
       </React.Fragment>
     );
   }
@@ -63,11 +62,9 @@ export default class Posts extends Component {
   toggleComplete = async (task) => {
     const id = task._id;
     const response = await axios.put("http://localhost:3000/api/posts/toggle/" + id, {}, {headers:{ user_auth_token:this.props.token}})
-    console.log(response.data)
   }
 
   handleAdd = async () => {
-    console.log("Handling add")
     const text = document.getElementById("add-task-input").value;
     if (text.length < 8) return 
     const response = await axios.post("http://localhost:3000/api/posts/", {user_auth_token:this.props.token, text})
@@ -87,7 +84,6 @@ export default class Posts extends Component {
     id = response.data._id;
 
     const posts = [...this.state.posts]
-    console.log(posts)
     const index = posts.findIndex(p => p._id === id);
     posts.splice(index, 1);
     this.setState({ posts })

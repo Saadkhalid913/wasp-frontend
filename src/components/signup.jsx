@@ -3,13 +3,15 @@ import React, { Component } from 'react';
 
 export default class Signup extends Component {
   state = {
-    error: null
+    error: null,
+    message: null
   }
 
   render() {
     return (
       <div className = "signup-box">
         <p >{this.state.error}</p>
+        <p style={{color: "green"}}>{this.state.message}</p>
         <div>
           <label htmlFor = "username">Username</label>
           <input type="text" name = "username" id = "username-box" />
@@ -37,6 +39,7 @@ export default class Signup extends Component {
 
   handleSubmit = async () => {
     this.setState({error: null})
+    this.setState({message: null})
 
     const email = document.getElementById("email-box").value
     const username = document.getElementById("username-box").value
@@ -46,10 +49,19 @@ export default class Signup extends Component {
     if (!(pass1===pass2)) return this.setState({error: "The two passwords do not match"})
     
     const response = await axios.post("http://localhost:3000/api/users/signup", { email, username, password: pass1 })
-    console.log(response)
 
     if (response.data.error) return this.setState({error: response.data.error});
-    console.log(response)
+
+    if (response.data.user_auth_token) {
+      document.getElementById("email-box").value = ""
+      document.getElementById("username-box").value = ""
+      document.getElementById("password-box1").value = ""
+      document.getElementById("password-box2").value = ""
+        
+      return this.setState({message: "Account created successfully!"})
+
+    }
+    
   }
 
 }

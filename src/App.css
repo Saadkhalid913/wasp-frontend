@@ -4,9 +4,14 @@
   padding: 0;
 }
 
+* {
+  animation-duration: 200ms;
+  transition-duration: 200ms;
+}
+
 :root {
-  --text-color: black;
-  --main-background: rgb(241, 241, 48);
+  --main-contrast: black;
+  --main-background: #f2ef1b;
 }
 
 body {
@@ -21,58 +26,209 @@ body {
   align-items: center;
 }
 
+.navbar a {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  text-decoration: none;
+  font-weight: 700;
+  color: var(--main-contrast);
+}
+
 .login-box {
   width: min(90%, 25rem);
-  height: 15rem;
-  border: 1px solid black;
+  height: 20rem;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  margin-top: 7.5vh;
   justify-content: space-around;
+  align-items: center;
+  padding: 1rem;
+  border: 4px solid var(--main-contrast);
+}
+
+.login-box a {
+  color: var(--main-contrast);
 }
 
 .login-box > div {
+  width: 80%;
   display: flex;
   flex-direction: column;
+}
+
+.login-box > div > input {
+  margin-top: 1vh;
+  height: 6vh;
+  padding: 1rem;
+  border-radius: 4px;
+  outline: none;
+  border: 3px solid var(--main-contrast);
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.login-box #login-error {
+  position: fixed;
+}
+
+.login-box > div > label {
+  font-weight: 500;
+}
+
+.login-box button {
+  width: 27%;
+  height: 13.5%;
+  border-radius: 4px;
+  background-color: var(--main-contrast);
+  color: var(--main-background);
+  font-weight: 600;
+  border: none;
+  outline: none;
+  margin-top: 1vh;
 }
 
 .signup-box {
+  padding: 1rem;
   width: min(90%, 25rem);
-  height: 15rem;
-  border: 1px solid black;
+  height: 27.5rem;
+  border: 4px solid var(--main-contrast);
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  align-items: center;
   justify-content: space-around;
+  margin-top: 4vh;
+}
+
+.signup-box > p {
+  color: red;
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 1vh;
 }
 
 .signup-box > div {
+  width: 80%;
   display: flex;
   flex-direction: column;
+}
+
+.signup-box > button {
+  width: 27%;
+  height: 8.5%;
+  border-radius: 4px;
+  background-color: var(--main-contrast);
+  color: var(--main-background);
+  font-weight: 600;
+  border: none;
+  outline: none;
+  margin-top: 1vh;
+}
+
+.signup-box > div > input {
+  margin-top: 1vh;
+  height: 6vh;
+  padding: 1rem;
+  border-radius: 4px;
+  outline: none;
+  border: 3px solid var(--main-contrast);
+  background-color: transparent;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
 
 .navbar a {
   font-size: 2rem;
 }
 
+.tasks-wrapper {
+  height: max(100vh);
+  background-color: white;
+}
+
 .tasks {
-  border: 2px solid orange;
+  background-color: white;
+}
+
+.add-task-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 2vh;
+  height: 10vh;
+}
+
+#add-task-input {
+  height: 5vh;
+  width: min(24rem, 85%);
+  font-weight: 500;
+  border: 3px solid var(--main-contrast);
+  padding-left: 0.25rem;
+}
+
+#add-task-button {
+  border-radius: 4px;
+  height: 5vh;
+  width: min(6rem, 20%);
+  background-color: var(--main-background);
+  color: var(--main-contrast);
+  font-weight: 600;
+  border: none;
+  outline: none;
+  margin-left: 2vw;
+  border: 3px solid var(--main-contrast);
 }
 
 .task {
+  margin: 1rem;
   display: flex;
   flex-direction: row;
-  /* align-items: center; */
   justify-content: space-between;
+  z-index: 1;
+  box-shadow: 0 0 8px 1px rgb(128, 128, 128);
 }
 
 .task > p {
   width: 90%;
   padding-left: 30%;
   padding: 1.5rem;
-  border: 1px solid black;
 }
 
 .task > button {
-  width: 10%;
+  background-color: var(--main-background);
+  color: var(--main-contrast);
+  width: max(10%, 5rem);
+  border: none;
+  outline: none;
+  margin: 1vw;
+  font-size: 2rem;
+  text-align: center;
+  vertical-align: bottom;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media only screen and (min-width: 900px) {
+  .task > button {
+    margin: 0.5vw;
+  }
+}
+
+.task > button:hover {
+  transform: scale(1.01, 1.01);
+}
+
+.task > button:active {
+  background-color: #f2ee1b88;
+}
+
+.no-posts-wrapper {
+  margin: 0 auto;
+  text-align: center;
+  font-size: 2rem;
 }
