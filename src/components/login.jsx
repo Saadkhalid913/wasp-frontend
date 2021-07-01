@@ -16,7 +16,7 @@ export default class Login extends Component {
   }
 
   componentDidMount() {
-    this.addListeners();
+    // this.addListeners();
     if (localStorage.getItem("user_auth_token")) return this.props.submitToken(localStorage.getItem("user_auth_token"))
   }
   render() {
