@@ -12,12 +12,12 @@ export default class Posts extends Component {
     const posts = await this.GetUserPosts()
     this.setState({ posts })
 
-    window.addEventListener("keyup", (e) => {
-      if (e.keyCode === 13) {
-        e.preventDefault();
-        document.getElementById("add-task-button").click()
-      }
-    })
+    // window.addEventListener("keyup", (e) => {
+    //   if (e.keyCode === 13) {
+    //     e.preventDefault();
+    //     document.getElementById("add-task-button").click()
+    //   }
+    // })
   }
   
   render() {
@@ -68,6 +68,8 @@ export default class Posts extends Component {
       this.logOut()
       return
     }
+
+    if (!Array.isArray(post.data)) return
     this.setState({token: true})
     return posts.data
   }
