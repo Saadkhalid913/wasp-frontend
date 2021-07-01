@@ -11,13 +11,6 @@ export default class Posts extends Component {
   componentDidMount = async () => {
     const posts = await this.GetUserPosts()
     this.setState({ posts })
-
-    // window.addEventListener("keyup", (e) => {
-    //   if (e.keyCode === 13) {
-    //     e.preventDefault();
-    //     document.getElementById("add-task-button").click()
-    //   }
-    // })
   }
   
   render() {
@@ -42,13 +35,12 @@ export default class Posts extends Component {
               <button onClick={() => this.handleAdd()} id = "add-task-button">Add post</button>
         </div>
         <div className = "tasks">
-        { this.state.posts.map(post => {
-        if (!post) return 
-        return (<Task
+
+        {this.state.posts.map(post => (<Task
           key={post._id}
           task={post}
           toggleComplete={this.toggleComplete}
-          handleDelete={this.handleDelete}/>)})}
+          handleDelete={this.handleDelete}/>) )}
       </div>
        </div>
       </React.Fragment>
@@ -68,7 +60,12 @@ export default class Posts extends Component {
       return
     }
 
-    if (!Array.isArray(post.data)) return
+    if (!Array.isArray(posts.data)) return []
+    
+    for (let i; i < posts.data.length; i++ ){
+      if (!posts.data[i]) posts.data.splice(i, 1)
+    }
+
     this.setState({token: true})
     return posts.data
   }
