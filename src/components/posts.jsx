@@ -42,14 +42,13 @@ export default class Posts extends Component {
               <button onClick={() => this.handleAdd()} id = "add-task-button">Add post</button>
         </div>
         <div className = "tasks">
-        { this.state.posts.map(post => (
-
-        <Task
+        { this.state.posts.map(post => {
+        if (!post) return 
+        return (<Task
           key={post._id}
           task={post}
           toggleComplete={this.toggleComplete}
-          handleDelete={this.handleDelete}/>
-      ))}
+          handleDelete={this.handleDelete}/>)})}
       </div>
        </div>
       </React.Fragment>
