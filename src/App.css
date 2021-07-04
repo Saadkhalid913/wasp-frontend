@@ -21,10 +21,21 @@ body {
 
 .navbar {
   display: flex;
+  flex-direction: row;
   height: 10vh;
   width: 100%;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
+}
+
+.logout {
+  align-self: center;
+  height: 4vh;
+  width: max(6rem, 8vw);
+  background-color: var(--main-contrast);
+  color: var(--main-background);
+  border-radius: 4px;
+  justify-self: flex-end;
 }
 
 .navbar a {
