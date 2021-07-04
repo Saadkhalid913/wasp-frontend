@@ -8,7 +8,6 @@ export default class Navbar extends Component {
 
 
     if (token) {
-      console.log("Token is in")
       return (
         <div className="navbar">
           <a href ="/">Wasp</a>
@@ -16,8 +15,6 @@ export default class Navbar extends Component {
         </div>
       )}
 
-    console.log("no Token")
-    
     return (
       <div className="navbar">
         <a href ="/">Wasp</a>
