@@ -17,8 +17,9 @@ export default class App extends Component {
   render(){
     if (!this.state.token) {
       return (
+
         <Router>
-          <Route path = "/" component = {Navbar}/> 
+          <Route path = "/" component = {(props) => <Navbar {...props} token = {false} logout = {this.logOut}/> }/> 
            <Route path ="/" exact render = {(props) => <Login {...props} key="login-box" submitToken={this.submitToken}/>}/>
            <Route path ="/signup" exact component={Signup}/>
         </Router>
@@ -26,7 +27,7 @@ export default class App extends Component {
     }
    return (
    <React.Fragment>
-     <Navbar /> 
+    <Navbar  token = {true} logout = {this.logOut}/> 
      <Tasks token = {this.state.token}/>
    </React.Fragment>
    )
